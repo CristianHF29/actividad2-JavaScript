@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nota Final del Alumno</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+    
+    <!-- EJERCICIO 2: Crear una función que determine la nota final de un alumno, la cual depende
+    de lo siguiente:
+        • Examen =20%
+        • tareas = 40%
+        • asistencia = 10%
+        • investigación = 30%
+    Al final deberá mostrar los datos del alumno, nombre, carnet y nota final. -->
+
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Cálculo de Nota Final del Alumno</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <input type="text" id="nombre" class="form-control mb-3" placeholder="Nombre del alumno">
+                <input type="text" id="carnet" class="form-control mb-3" placeholder="Carnet">
+                <input type="number" id="examen" class="form-control mb-2" placeholder="Nota del Examen (20%)">
+                <input type="number" id="tareas" class="form-control mb-2" placeholder="Nota de Tareas (40%)">
+                <input type="number" id="asistencia" class="form-control mb-2" placeholder="Nota de Asistencia (10%)">
+                <input type="number" id="investigacion" class="form-control mb-2"
+                    placeholder="Nota de Investigación (30%)">
+                <button onclick="calcularNotaFinal()" class="btn btn-success w-100 mt-3">Calcular Nota Final</button>
+
+                <div class="m-2 bg-white p-3 rounded shadow" id="resultado"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calcularNotaFinal() {
+            const nombre = document.getElementById("nombre").value.trim();
+            const carnet = document.getElementById("carnet").value.trim();
+            const examen = parseFloat(document.getElementById("examen").value);
+            const tareas = parseFloat(document.getElementById("tareas").value);
+            const asistencia = parseFloat(document.getElementById("asistencia").value);
+            const investigacion = parseFloat(document.getElementById("investigacion").value);
+
+            const resultado = document.getElementById("resultado");
+
+            // Validación de campos vacíos o negativos
+            if (!nombre || !carnet || isNaN(examen) || isNaN(tareas) || isNaN(asistencia) || isNaN(investigacion)) {
+                resultado.innerHTML = `<p class="text-danger">Por favor, completa todos los campos correctamente.</p>`;
+                return;
+            }
+
+            if (examen < 0 || tareas < 0 || asistencia < 0 || investigacion < 0) {
+                resultado.innerHTML = `<p class="text-danger">Las notas no pueden ser menores a 0.</p>`;
+                return;
+            }
+
+            // Cálculo de la nota final
+            const notaFinal = (examen * 0.20) + (tareas * 0.40) + (asistencia * 0.10) + (investigacion * 0.30);
+
+            resultado.innerHTML =
+             `<div class="alert alert-info">
+             <p><strong>Nombre:</strong> ${nombre}</p>
+             <p><strong>Carnet:</strong> ${carnet}</p>
+             <p><strong>Nota Final:</strong> ${notaFinal.toFixed(2)}</p>
+             </div>`;
+        }
+    </script>
+
+</body>
+
+</html>

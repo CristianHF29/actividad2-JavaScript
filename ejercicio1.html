@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        crossorigin="anonymous">
+    <title>Verificacion de edad</title>
+</head>
+
+<body class="bg-light">
+    
+    <!-- EJERCICIO 1: Crear una función que en base a la edad que ingreso el usuario devolver un
+    mensaje si la persona es mayor de edad o no. Utilizar para la condición el operador ternario. -->
+
+    <div class="container text-center mt-5">
+        <h1>¿Eres mayor de edad?</h1>
+        <p>Ingresa tu edad para verificar</p>
+        <input type="number" id="edadInput" class="form-control w-25 mx-auto" placeholder="Ej: 18">
+        <button onclick="verificarEdad()" class="btn btn-success mt-3">Verificar</button>
+        <p id="resultado" class="mt-4 fs-4"></p>
+    </div>
+
+    <script>
+        function verificarEdad() {
+            const edadInput = document.getElementById("edadInput").value;
+            const resultado = document.getElementById("resultado");
+
+            // Validación: verificar que no esté vacío, que sea un número y que sea mayor o igual a 0
+            if (edadInput === "" || isNaN(edadInput) || parseInt(edadInput) <= 0) {
+                resultado.textContent = "Por favor, ingresa una edad válida (mayor a 0)";
+                return;
+            }
+
+            const edad = parseInt(edadInput);
+            const mensaje = edad >= 18 ? "Eres mayor de edad" : "Aún eres menor de edad";
+            resultado.textContent = mensaje;
+        }
+    </script>
+
+</body>
+
+</html>
